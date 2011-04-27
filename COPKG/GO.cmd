@@ -1,14 +1,19 @@
 @echo off
 setlocal enabledelayedexpansion
-set COPKG_VERSION=1.0.0.0
+REM move to the project root directory for consistency sake.
+cd %~dp0\..
+
+set COPKG_VERSION=1.0.0.1
 
 set VERIFY=
 set CLEAN=
 set BUILD=
+set TRACE=
 
 FOR %%A IN (%*) DO (
   if /i [%%A] == [clean] set CLEAN=TRUE
   if /i [%%A] == [build] set BUILD=TRUE
+  if /i [%%A] == [trace] set TRACE=TRUE
   if /i [%%A] == [verify] set VERIFY=TRUE
 )
 if NOT "%VERIFY%%BUILD%%CLEAN%" == "" goto CONTINUE
@@ -66,7 +71,7 @@ echo ***********************************************************************
 goto FIN
 
 :VERIFY_OUTPUTS
-for /F %%v in (%~dp0\COPKG_OUTPUTS.TXT) do (
+for /F %%v in (%~dp0\verify-outputs.txt) do (
     set CURFILE=%%v
     if NOT exist !CURFILE! goto FAILED_VERIFY
 )
@@ -84,11 +89,11 @@ set SUCCESS=FALSE
 goto :EOF
 
 :DO_CLEAN
-call %~dp0\COPKG_CLEAN.CMD
+call %~dp0\clean.cmd
 goto :EOF
  
 :DO_BUILD
-call %~dp0\COPKG_BUILD.CMD
+call %~dp0\build.cmd
 goto :EOF
 
 :FIN
