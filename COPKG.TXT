@@ -1,0 +1,6 @@
+PRODUCT NAME: grep for Windows
+CURRENT VERSION: 2.0d
+ORIGINAL SOURCE LOCATION: http://www.interlog.com/~tcharron/grep20d_win.zip
+ORIGINAL SOURCE WEBSITE: http://pages.interlog.com/~tcharron/grep.html
+LICENSE: GPL 2
+
