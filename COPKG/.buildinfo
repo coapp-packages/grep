@@ -1,0 +1,23 @@
+/* grep */
+
+#product-info  {
+	product-name: "grep for Windows";
+	version: "2.0d";
+	original-source-location: "http://www.interlog.com/~tcharron/grep20d_win.zip";
+	original-source-website: "http://pages.interlog.com/~tcharron/grep.html";
+	license: "gpl v2";
+	packager: "garrett serack <garretts@microsoft.com>";
+}
+
+default {
+    targets: { "grep.exe" };
+
+    build-command: "cl /nologo /O2 /Tc *.c /DHAVE_STRERROR /link /nologo /out:grep.exe";
+    
+    clean-command: @"
+        echo Cleaning project directory.
+        erase /q *.obj > nul 2> nul
+        erase /q *.exe > nul 2> nul
+    ";
+};
+
